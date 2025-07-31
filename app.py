@@ -16,13 +16,6 @@ from streamlit import cache_data, cache_resource
 import numpy as np
 import spacy
 
-spacy download en_core_web_sm
-
-import subprocess
-import sys
-import spacy
-import os
-
 # 定义要下载的spaCy模型名称
 MODEL_NAME = "en_core_web_sm"
 
