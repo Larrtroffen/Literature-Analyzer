@@ -1,5 +1,7 @@
 # 文献分析应用 (Literature Analyzer)
 
+线上体验→(网址)[https://literature-analyzer-larrtroffen.streamlit.app/]
+
 基于Streamlit的交互式文献分析应用，专门处理从Web of Science (WoS)导出的Full Record Excel文件，旨在为科研人员提供强大的工具来探索大规模文献集合，揭示学科结构、研究热点、以及期刊间的学术内容与风格差异。
 
 ## 功能特性
