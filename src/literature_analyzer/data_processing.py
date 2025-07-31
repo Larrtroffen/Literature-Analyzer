@@ -10,6 +10,7 @@ import hashlib
 import logging
 from typing import List, Optional, Tuple
 import pandas as pd
+import sys
 import spacy
 
 # 配置日志
