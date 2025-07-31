@@ -53,6 +53,7 @@ dependencies = [
     "shap>=0.42.0",
     "dask>=2023.10.0",
     "numba>=0.58.0",
+    "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
 ]
 
 [project.optional-dependencies]
