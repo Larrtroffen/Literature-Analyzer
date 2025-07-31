@@ -1,0 +1,107 @@
+[project]
+name = "literature-analyzer"
+version = "2.0.0"
+description = "基于Streamlit的交互式文献分析应用，专门处理Web of Science导出的Full Record Excel文件"
+authors = [
+    {name = "Research Team", email = "research@example.com"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10,<3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+dependencies = [
+    "streamlit>=1.28.0",
+    "pandas>=2.0.0",
+    "openpyxl>=3.1.0",
+    "sentence-transformers>=2.2.0",
+    "umap-learn>=0.5.0",
+    "bertopic>=0.16.0",
+    "spacy>=3.7.0",
+    "plotly>=5.15.0",
+    "wordcloud>=1.9.0",
+    "tqdm>=4.65.0",
+    "scipy>=1.11.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "pip>=25.1.1",
+    "xlrd>=2.0.2",
+    "gensim>=4.3.0",
+    "transformers>=4.35.0",
+    "torch>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "hdbscan>=0.8.0",
+    "openai>=1.98.0",
+    "streamlit-plotly-events>=0.0.6",
+    "networkx>=3.1",
+    "pyvis>=0.3.2",
+    "nltk>=3.8.0",
+    "dash>=2.14.0",
+    "igraph>=0.11.0",
+    "leidenalg>=0.10.0",
+    "statsmodels>=0.14.0",
+    "prophet>=1.1.0",
+    "optuna>=3.3.0",
+    "shap>=0.42.0",
+    "dask>=2023.10.0",
+    "numba>=0.58.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+]
+report = [
+    "weasyprint>=59.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
