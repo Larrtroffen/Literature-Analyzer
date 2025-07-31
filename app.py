@@ -14,6 +14,9 @@ import pandas as pd
 import streamlit as st
 from streamlit import cache_data, cache_resource
 import numpy as np
+import spacy
+
+spacy download en_core_web_sm
 
 import subprocess
 import sys
