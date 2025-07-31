@@ -19,51 +19,62 @@ import spacy
 # 定义要下载的spaCy模型名称
 MODEL_NAME = "en_core_web_sm"
 
-def download_spacy_model(model_name):
+import subprocess
+import sys
+import spacy
+import logging # 假设你使用了logging，如果没有可以替换为print
+
+# 配置日志（如果需要）
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+MODEL_NAME = "en_core_web_sm"
+
+def ensure_spacy_model(model_name):
     """
     尝试加载spaCy模型，如果不存在则尝试下载。
     """
     try:
         # 尝试加载模型
         nlp = spacy.load(model_name)
-        print(f"✅ spaCy 模型 '{model_name}' 已加载。")
+        logger.info(f"✅ spaCy 模型 '{model_name}' 已加载。")
         return nlp
     except OSError:
         # 如果模型不存在，则尝试下载
-        print(f"⚠️ spaCy 模型 '{model_name}' 未找到。尝试下载...")
+        logger.warning(f"⚠️ spaCy 模型 '{model_name}' 未找到。尝试下载...")
         try:
             # 构建下载命令。使用 sys.executable 确保使用当前环境的 Python 解释器。
             command = [sys.executable, "-m", "spacy", "download", model_name]
-            print(f"执行命令: {' '.join(command)}")
+            logger.info(f"执行命令: {' '.join(command)}")
 
-            # 执行命令
+            # 执行命令，并捕获输出
             # check=True: 如果命令返回非零退出码（表示失败），则抛出 CalledProcessError
             # capture_output=True: 捕获标准输出和标准错误
             # text=True: 将输出解码为文本
             result = subprocess.run(command, check=True, capture_output=True, text=True)
 
-            print(f"🎉 模型 '{model_name}' 下载成功！")
+            logger.info(f"🎉 模型 '{model_name}' 下载成功！")
             if result.stdout:
-                print("--- 下载输出 (STDOUT) ---")
-                print(result.stdout)
+                logger.info("--- 下载输出 (STDOUT) ---")
+                logger.info(result.stdout)
             if result.stderr:
-                print("--- 下载错误 (STDERR) ---")
-                print(result.stderr)
+                logger.warning("--- 下载错误 (STDERR) ---")
+                logger.warning(result.stderr) # 即使成功，有时也会有警告信息在stderr
 
             # 下载成功后再次尝试加载模型
             nlp = spacy.load(model_name)
-            print(f"✅ spaCy 模型 '{model_name}' 已成功下载并加载。")
+            logger.info(f"✅ spaCy 模型 '{model_name}' 已成功下载并加载。")
             return nlp
 
         except subprocess.CalledProcessError as e:
-            print(f"❌ 下载模型 '{model_name}' 失败。")
-            print(f"命令: {e.cmd}")
-            print(f"返回码: {e.returncode}")
-            print(f"STDOUT: {e.stdout}")
-            print(f"STDERR: {e.stderr}")
+            logger.error(f"❌ 下载模型 '{model_name}' 失败。")
+            logger.error(f"命令: {e.cmd}")
+            logger.error(f"返回码: {e.returncode}")
+            logger.error(f"STDOUT: {e.stdout}") # 打印子进程的标准输出
+            logger.error(f"STDERR: {e.stderr}") # 打印子进程的标准错误 (这里通常会有详细的错误信息)
             sys.exit(1) # 下载失败，退出脚本
         except Exception as e:
-            print(f"❌ 在下载或加载模型 '{model_name}' 过程中发生意外错误: {e}")
+            logger.error(f"❌ 在下载或加载模型 '{model_name}' 过程中发生意外错误: {e}")
             sys.exit(1) # 发生其他错误，退出脚本
 
 # 添加src目录到Python路径
