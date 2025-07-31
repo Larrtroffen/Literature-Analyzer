@@ -13,6 +13,9 @@ import pandas as pd
 import streamlit as st
 from streamlit import cache_data, cache_resource
 import numpy as np
+import spacy
+
+spacy download en_core_web_sm
 
 # 添加src目录到Python路径
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
