@@ -24,7 +24,7 @@ except OSError:
     try:
         # 尝试自动下载模型
         import subprocess
-        subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+        subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_sm"], check=True)
         nlp = spacy.load("en_core_web_sm")
         logger.info("spaCy英语模型下载并加载成功")
     except Exception as e:
